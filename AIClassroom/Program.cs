@@ -72,4 +72,12 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
-app.Run();
+// הוספת הנתונים ההתחלתיים למסד הנתונים
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AIClassroom.DAL.Models.AIClassroomDbContext>();
+    // dbContext.Database.Migrate(); // אם אתה משתמש במיגרציות, זו שורה טובה להוסיף
+}
+AIClassroom.Data.DataSeeder.Seed(app); // הפעלת ה-Seeder שלנו
+
+app.Run(); // השורה הזאת כבר קיימת, השאר אותה בסוף
