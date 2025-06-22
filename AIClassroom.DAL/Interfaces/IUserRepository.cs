@@ -1,8 +1,5 @@
 ﻿using AIClassroom.DAL.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AIClassroom.DAL.Interfaces
@@ -14,5 +11,7 @@ namespace AIClassroom.DAL.Interfaces
         Task<List<User>> GetAllUsersAsync();
         Task<User?> GetUserByIdAsync(int id);
         Task UpdateUserAsync(User user);
+
+        Task<User?> GetUserByNameAndPhoneAsync(string name, string phone);
     }
 }

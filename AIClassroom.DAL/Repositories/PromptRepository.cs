@@ -18,14 +18,12 @@ namespace AIClassroom.DAL.Repositories
             _context = context;
         }
 
-        // Create
         public async Task AddPromptAsync(Prompt prompt)
         {
             _context.Prompts.Add(prompt);
             await _context.SaveChangesAsync();
         }
 
-        // Read
         public async Task<Prompt?> GetPromptByIdAsync(int id)
         {
             return await _context.Prompts.FindAsync(id);
@@ -36,14 +34,12 @@ namespace AIClassroom.DAL.Repositories
             return await _context.Prompts.ToListAsync();
         }
 
-        // Update
         public async Task UpdatePromptAsync(Prompt prompt)
         {
             _context.Prompts.Update(prompt);
             await _context.SaveChangesAsync();
         }
 
-        // Delete
         public async Task DeletePromptAsync(int id)
         {
             var prompt = await _context.Prompts.FindAsync(id);

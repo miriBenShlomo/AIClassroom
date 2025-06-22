@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AIClassroom.DAL.Models; // הוספת using מתאים
+using AIClassroom.DAL.Models; 
 
 namespace AIClassroom.DAL.Interfaces
 {

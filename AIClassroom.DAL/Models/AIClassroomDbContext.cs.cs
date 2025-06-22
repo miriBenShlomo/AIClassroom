@@ -20,10 +20,7 @@ public partial class AIClassroomDbContext : DbContext
     public virtual DbSet<SubCategory> SubCategories { get; set; }
     public virtual DbSet<User> Users { get; set; }
 
-    // הסרתי את OnConfiguring - עכשיו ה-connection string יבוא מ-Program.cs
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //     => optionsBuilder.UseSqlServer("...");
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>

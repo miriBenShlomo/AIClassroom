@@ -18,14 +18,12 @@ namespace AIClassroom.DAL.Repositories
             _context = context;
         }
 
-        // Create
         public async Task AddSubCategoryAsync(SubCategory subCategory)
         {
             _context.SubCategories.Add(subCategory);
             await _context.SaveChangesAsync();
         }
 
-        // Read
         public async Task<SubCategory?> GetSubCategoryByIdAsync(int id)
         {
             return await _context.SubCategories.FindAsync(id);
@@ -36,14 +34,12 @@ namespace AIClassroom.DAL.Repositories
             return await _context.SubCategories.ToListAsync();
         }
 
-        // Update
         public async Task UpdateSubCategoryAsync(SubCategory subCategory)
         {
             _context.SubCategories.Update(subCategory);
             await _context.SaveChangesAsync();
         }
 
-        // Delete
         public async Task DeleteSubCategoryAsync(int id)
         {
             var subCategory = await _context.SubCategories.FindAsync(id);

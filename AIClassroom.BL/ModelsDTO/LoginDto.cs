@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AIClassroom.BL.ModelsDTO
 {
-
-    public class UserRegistrationDto
+    public class LoginDto
     {
         public string Name { get; set; } = null!;
-        public string?Phone{ get; set; }
+        public string Phone { get; set; } = null!;
     }
+
 }

@@ -28,8 +28,6 @@ namespace AIClassroom.Controllers
         /// <summary>
         /// Registers a new user in the system.
         /// </summary>
-        /// <param name="userRegistrationDto">The user's name and phone number.</param>
-        /// <returns>A 201 Created response with the newly created user object, including their ID.</returns>
         [HttpPost("register")]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -52,10 +50,24 @@ namespace AIClassroom.Controllers
         }
 
         /// <summary>
+        /// Logs in a user using name and phone.
+        /// </summary>
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<UserDto>> LoginUser([FromBody] LoginDto loginDto)
+        {
+            var user = await _userService.GetUserByNameAndPhoneAsync(loginDto.Name, loginDto.Phone);
+
+            if (user == null)
+                return Unauthorized("User not found or credentials incorrect");
+
+            return Ok(user);
+        }
+
+        /// <summary>
         /// Gets a specific user by their ID.
         /// </summary>
-        /// <param name="id">The unique identifier of the user.</param>
-        /// <returns>The user object if found; otherwise, a 404 Not Found response.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -72,8 +84,6 @@ namespace AIClassroom.Controllers
         /// <summary>
         /// Gets the entire learning history (all prompts) for a specific user.
         /// </summary>
-        /// <param name="userId">The unique identifier of the user whose history is requested.</param>
-        /// <returns>A list of prompts created by the specified user.</returns>
         [HttpGet("{userId}/prompts")]
         [ProducesResponseType(typeof(IEnumerable<PromptDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<PromptDto>>> GetUserPromptHistory(int userId)
@@ -85,8 +95,7 @@ namespace AIClassroom.Controllers
         /// <summary>
         /// Gets a list of all users. (Intended for Admin Dashboard)
         /// </summary>
-        /// <returns>A list of all users in the system.</returns>
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(typeof(IEnumerable<UserDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
         {

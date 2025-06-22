@@ -10,12 +10,13 @@ namespace AIClassroom.BL.API
 {
     public interface IUserService
     {
-        // מקורי
-        // מתוקן
+        
         Task<UserDto> AddUserAsync(UserDto userDto);
         Task DeleteUserAsync(int id);
         Task<List<UserDto>> GetAllUsersAsync();
         Task<UserDto?> GetUserByIdAsync(int id);
         Task UpdateUserAsync(UserDto userDto);
+        Task<UserDto?> GetUserByNameAndPhoneAsync(string name, string phone);
+
     }
 }

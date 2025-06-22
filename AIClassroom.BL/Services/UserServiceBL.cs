@@ -64,5 +64,15 @@ namespace AIClassroom.BL.Services
 
             await _userRepository.DeleteUserAsync(id);
         }
+
+        // ✅ תוספת חדשה עבור Login לפי שם וטלפון
+        public async Task<UserDto?> GetUserByNameAndPhoneAsync(string name, string phone)
+        {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(phone))
+                throw new ArgumentException("Name and phone are required.");
+
+            var user = await _userRepository.GetUserByNameAndPhoneAsync(name, phone);
+            return user != null ? _mapper.Map<UserDto>(user) : null;
+        }
     }
 }

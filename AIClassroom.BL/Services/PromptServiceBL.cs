@@ -3,10 +3,6 @@ using AIClassroom.BL.ModelsDTO;
 using AIClassroom.DAL.Interfaces;
 using AIClassroom.DAL.Models;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AIClassroom.BL.Services
 {
@@ -72,10 +68,14 @@ namespace AIClassroom.BL.Services
             if (promptDto.UserId <= 0 || promptDto.CategoryId <= 0 || promptDto.SubCategoryId <= 0)
                 throw new ArgumentException("Invalid UserId, CategoryId, or SubCategoryId.");
 
-            // Generate lesson using AI
-            var lesson = await _aiService.GenerateLessonAsync(promptDto.PromptText, promptDto.CategoryId, promptDto.SubCategoryId);
+            // 👇 קריאה לשירות OpenAI דרך AIServiceBL (שכבר מטפל בשגיאות ו־BaseAddress)
+            var lesson = await _aiService.GenerateLessonAsync(
+                promptDto.PromptText,
+                promptDto.CategoryId,
+                promptDto.SubCategoryId
+            );
 
-            // Save the prompt and response to the database
+            // שמירת הפרומפט עם התגובה שנוצרה
             var prompt = _mapper.Map<Prompt>(promptDto);
             prompt.Response = lesson;
             prompt.CreatedAt = DateTime.UtcNow;

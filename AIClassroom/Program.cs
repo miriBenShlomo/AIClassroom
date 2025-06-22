@@ -9,38 +9,30 @@ using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. רישום שירותים בסיסיים
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 2. רישום תלויות הפרויקט
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-// שם המחלקה הנכון הוא AIClassroomDbContext (לא AlClassroomDBContext)
+
+
 builder.Services.AddDbContext<AIClassroomDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 3. רישום Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IPromptRepository, PromptRepository>();
 
-// 4. רישום Services (עם השמות הנכונים של המחלקות)
 builder.Services.AddScoped<IUserService, UserService>();
-// שם המחלקה הנכון הוא CategoryService (לא CategoriesService)
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-// שם המחלקה הנכון הוא SubCategoryService (לא SubCategoriesService)
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
-// שם המחלקה הנכון הוא PromptServiceBL (לא PromptService)
 builder.Services.AddScoped<IPromptService, PromptServiceBL>();
-// שם המחלקה הנכון הוא AIServiceBL (לא AIService)
-builder.Services.AddScoped<IAIServiceBL, AIServiceBL>();
 
-// 5. רישום OpenAI
-// שם המחלקה הנכון הוא AIServiceBL (לא AIService)
 builder.Services.AddHttpClient<IAIServiceBL, AIServiceBL>(client =>
 {
+    client.BaseAddress = new Uri("https://api.openai.com/v1/");
     var apiKey = builder.Configuration["OpenAI:ApiKey"];
     if (!string.IsNullOrEmpty(apiKey))
     {
@@ -48,7 +40,6 @@ builder.Services.AddHttpClient<IAIServiceBL, AIServiceBL>(client =>
     }
 });
 
-// 6. הגדרת CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -72,12 +63,14 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
-// הוספת הנתונים ההתחלתיים למסד הנתונים
+
+
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AIClassroom.DAL.Models.AIClassroomDbContext>();
-    // dbContext.Database.Migrate(); // אם אתה משתמש במיגרציות, זו שורה טובה להוסיף
-}
-AIClassroom.Data.DataSeeder.Seed(app); // הפעלת ה-Seeder שלנו
+    var dbContext = scope.ServiceProvider.GetRequiredService<AIClassroomDbContext>();
 
-app.Run(); // השורה הזאת כבר קיימת, השאר אותה בסוף
+}
+
+AIClassroom.Data.DataSeeder.Seed(app);
+
+app.Run();

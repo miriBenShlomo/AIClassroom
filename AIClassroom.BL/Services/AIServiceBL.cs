@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using global::AIClassroom.BL.API;
 using System.Net.Http;
 using System.Net.Http.Json;
-
+using System.Threading.Tasks;
+using AIClassroom.BL.API;
 
 namespace AIClassroom.BL.Services
 {
@@ -24,7 +20,6 @@ namespace AIClassroom.BL.Services
             if (string.IsNullOrWhiteSpace(promptText))
                 throw new ArgumentException("Prompt text cannot be empty.");
 
-            // Prepare the request body for OpenAI API
             var requestBody = new
             {
                 model = "text-davinci-003",
@@ -32,13 +27,11 @@ namespace AIClassroom.BL.Services
                 max_tokens = 500
             };
 
-            // Send the request to OpenAI API
-            var response = await _httpClient.PostAsJsonAsync("https://api.openai.com/v1/completions", requestBody);
+            var response = await _httpClient.PostAsJsonAsync("completions", requestBody);
             response.EnsureSuccessStatusCode();
 
-            // Parse the response
             var result = await response.Content.ReadFromJsonAsync<dynamic>();
-            return result?.choices[0]?.text?.ToString() ?? "No response from AI.";
+            return result?.choices?[0]?.text?.ToString()?.Trim() ?? "No response from AI.";
         }
     }
 }

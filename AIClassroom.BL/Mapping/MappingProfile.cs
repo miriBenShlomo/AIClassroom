@@ -8,16 +8,16 @@ namespace AIClassroom.BL.Mapping
     {
         public MappingProfile()
         {
-            // User
+            
             CreateMap<User, UserDto>().ReverseMap();
 
-            // Category
+     
             CreateMap<Category, CategoryDto>().ReverseMap();
 
-            // SubCategory
+           
             CreateMap<SubCategory, SubCategoryDto>().ReverseMap();
 
-            // Prompt
+            
             CreateMap<Prompt, PromptDto>()
                 .ForMember(dest => dest.PromptText, opt => opt.MapFrom(src => src.Prompt1))
                 .ReverseMap()
