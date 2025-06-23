@@ -1,0 +1,38 @@
+/* src/pages/AuthPage.css */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e9e3f5;
+  }
+  
+  .auth-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    background-color: #f9f7ff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(103, 58, 183, 0.1);
+  }
+  
+  .auth-title {
+    text-align: center;
+    color: #673ab7;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+  
+  .auth-switch {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+  }
+  
+  .auth-switch a {
+      color: #673ab7;
+      font-weight: 600;
+      text-decoration: none;
+  }
+  /* אנו משתמשים מחדש במחלקות שכבר הגדרנו ב-DashboardPage.css
+     אבל כדי שזה יעבוד, צריך לייבא את העיצובים הגלובליים */

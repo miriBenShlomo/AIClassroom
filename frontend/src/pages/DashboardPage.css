@@ -1,0 +1,97 @@
+/* src/pages/DashboardPage.css */
+
+.dashboard-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background-color: #f9f7ff; /* סגול מאוד בהיר, כמעט לבן */
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(103, 58, 183, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .dashboard-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(103, 58, 183, 0.15);
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    color: #673ab7; /* סגול עמוק */
+    margin-bottom: 2rem;
+    font-size: 2.25rem;
+    font-weight: 700;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a4a4a;
+    font-weight: 600;
+  }
+  
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: #673ab7;
+    box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.2);
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .submit-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .submit-button:disabled {
+    background-image: none;
+    background-color: #c5b3e0;
+    cursor: not-allowed;
+  }
+  
+  .response-container {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border: 1px dashed #d1c4e9;
+    border-radius: 15px;
+    background-color: white;
+  }
+  
+  .response-container h2 {
+    color: #673ab7;
+    margin-bottom: 1rem;
+  }
+  
+  .response-container p {
+    line-height: 1.7;
+    color: #333;
+    white-space: pre-wrap;
+  }

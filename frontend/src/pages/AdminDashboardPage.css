@@ -1,0 +1,39 @@
+/* src/pages/AdminDashboardPage.css */
+.admin-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+  }
+  .admin-title {
+    text-align: center;
+    color: #673ab7;
+    margin-bottom: 2rem;
+  }
+  .admin-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(103, 58, 183, 0.1);
+  }
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .admin-table th, .admin-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .admin-table th {
+    color: #673ab7;
+  }
+  .action-button {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+  .action-button.view { background-color: #2196F3; }
+  .action-button.delete { background-color: #f44336; }
